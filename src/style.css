@@ -1,0 +1,268 @@
+        body {
+            background-color: rgba(0, 0, 0, 0.85);
+        }
+        
+        .wrapper {
+            margin: 0 auto;
+            font-family: 'Press Start 2P', cursive;
+            transform-style: preserve-3d;
+        }
+        
+        .hidden {
+            display: none
+        }
+        
+        .description,
+        .language,
+        .title {
+            margin: 10px auto;
+            text-align: center;
+        }
+        
+        .title,
+        .keyboard,
+        .textarea,
+        .description,
+        .language {
+            position: absolute;
+            transform: rotateX(-306deg) rotateY(5deg) rotateZ(315deg);
+            transform-origin: 20% 45% 270px;
+        }
+        
+        .title {
+            top: 23px;
+            left: 18px;
+            padding-top: 20px;
+            margin-bottom: 0px;
+            font-size: 30px;
+            color: mediumturquoise;
+            background: rgb(48, 62, 104);
+            background: linear-gradient(180deg, rgba(48, 62, 104, 1) 80%, rgba(48, 62, 104, 0) 100%);
+            width: 718px;
+            height: 55px;
+            border-radius: 15px;
+            -webkit-text-fill-color: mediumturquoise;
+            text-shadow: -3px 3px 6px darkgrey;
+        }
+        
+        .textarea {
+            display: block;
+            z-index: 10;
+            max-width: 700px;
+            height: 200px;
+            margin: 10px auto 10px;
+            padding: 20px;
+            padding-top: 70px;
+            border-radius: 15px;
+            box-shadow: -5px 4px 25px royalblue;
+            resize: none;
+            background-color: rgba(65, 105, 225, 0.35);
+            color: mediumturquoise;
+            top: -30px;
+            left: 80px;
+            border: 2px solid lightskyblue;
+            text-shadow: -3px 2px 6px darkgrey;
+            font-size: 26px;
+        }
+        
+        .keyboard {
+            left: 190px;
+            top: 190px;
+            width: 1070px;
+            margin: 0 auto;
+            padding: 5px 0 0 5px;
+            font-family: sans-serif;
+            font-weight: 800;
+            transform: rotateX(-306deg) rotateY(5deg) rotateZ(315deg);
+            transform-origin: 20% 45% 270px;
+        }
+        
+        .description {
+            font-size: 20px;
+            left: 400px;
+            top: 435px;
+            font-weight: 800;
+            text-shadow: -8px 7px 5px grey;
+            color: white;
+        }
+        
+        .language {
+            color: black;
+            font-size: 40px;
+            left: 470px;
+            top: 440px;
+            font-weight: 800;
+            -webkit-text-stroke: rgb(255 255 255 / 53%) 0.01px;
+            text-shadow: -8px 7px 5px grey;
+        }
+        
+        .keyboard .row {
+            clear: both;
+            width: 100%;
+            height: 60px;
+        }
+        
+        .keyboard .key {
+            float: left;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            margin: 5px;
+            line-height: 50px;
+            font-weight: 800;
+            text-align: center;
+            color: white;
+            background-color: black;
+            cursor: pointer;
+            user-select: none;
+            transition: border-radius 0.15s, background-color 0.3s, border-color 0.3s;
+            box-shadow: -8px 7px 5px grey;
+            border: 5px solid black;
+        }
+        
+        .keyboard .key:hover {
+            border: 5px solid rgba(65, 105, 225, 1);
+        }
+        
+        .keyboard .key.active {
+            background-color: rgba(65, 105, 225, 1);
+            border-radius: 60px;
+            animation-name: press-button;
+            animation-duration: 0.3s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            border: 5px solid rgba(65, 105, 225, 1);
+        }
+        
+        .keyboard .key:active {
+            background-color: rgba(65, 105, 225, 1);
+            border-radius: 60px;
+            animation-name: press-button;
+            animation-duration: 0.3s;
+            animation-timing-function: linear;
+            animation-iteration-count: 1;
+            border: 5px solid rgba(65, 105, 225, 1);
+        }
+        
+        @keyframes press-button {
+            0% {
+                box-shadow: -8px 7px 5px grey;
+            }
+            50% {
+                transform: translate(0, 7px);
+                box-shadow: -4px 4px 5px grey;
+            }
+            100% {
+                box-shadow: -8px 7px 5px grey;
+            }
+        }
+        
+        .keyboard .AltLeft,
+        .keyboard .AltRight,
+        .keyboard .ArrowUp,
+        .keyboard .ArrowLeft,
+        .keyboard .ArrowDown,
+        .keyboard .ArrowRight,
+        .keyboard .Backspace,
+        .keyboard .CapsLock,
+        .keyboard .ControlLeft,
+        .keyboard .ControlRight,
+        .keyboard .Delete,
+        .keyboard .Enter,
+        .keyboard .ShiftLeft,
+        .keyboard .ShiftRight,
+        .keyboard .Tab,
+        .keyboard .MetaLeft {
+            font-weight: 600;
+        }
+        
+        .keyboard .Tab,
+        .keyboard .ControlLeft {
+            width: 75px
+        }
+        
+        .keyboard .CapsLock {
+            width: 100px;
+        }
+        
+        .keyboard .Backspace {
+            width: 140px;
+        }
+        
+        .keyboard .ShiftRight,
+        .keyboard .ShiftLeft {
+            width: 130px
+        }
+        
+        .keyboard .Delete {
+            width: 45px
+        }
+        
+        .keyboard .Enter {
+            width: 160px;
+        }
+        
+        .keyboard .MetaLeft,
+        .keyboard .AltLeft,
+        .keyboard .AltRight {
+            width: 60px;
+        }
+        
+        .keyboard .Space {
+            width: 425px
+        }
+        
+        .keyboard .ControlRight {
+            width: 60px;
+        }
+        
+         ::-webkit-scrollbar {
+            width: 10px;
+            cursor: pointer;
+        }
+        
+         ::-webkit-scrollbar-track {
+            border-radius: 100px;
+            cursor: pointer;
+        }
+        
+         ::-webkit-scrollbar-thumb {
+            background-color: aquamarine;
+            border-radius: 50px;
+            padding-right: 5px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 1130px) {
+            .keyboard,
+            .textarea,
+            .description,
+            .language {
+                position: relative;
+                left: 0;
+                top: 0;
+                transform: unset;
+                transform-origin: unset;
+                box-shadow: unset;
+            }
+            .title {
+                position: absolute;
+                z-index: 15;
+                transform: unset;
+                transform-origin: unset;
+                box-shadow: unset;
+                text-shadow: -1px 1px 4px darkgrey;
+                transform: translate(-50%);
+                left: calc(50% - 10px);
+                top: -8px;
+                max-width: 719px;
+                width: 100%;
+                background: linear-gradient(180deg, rgba(48, 62, 104, 1) 80%, rgba(48, 62, 104, 0) 100%);
+            }
+            .textarea {
+                text-shadow: -1px 1px 4px darkgrey;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                font-size: 20px;
+            }
+        }
