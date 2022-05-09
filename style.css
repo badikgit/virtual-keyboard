@@ -104,7 +104,8 @@
         
         .keyboard .key {
             float: left;
-            width: 50px;
+            width: 100%;
+            max-width: 50px;
             height: 50px;
             border-radius: 10px;
             margin: 5px;
@@ -116,45 +117,20 @@
             cursor: pointer;
             user-select: none;
             transition: border-radius 0.15s, background-color 0.3s, border-color 0.3s;
-            box-shadow: -8px 7px 5px grey;
             border: 5px solid black;
+            box-shadow: -8px 7px 5px grey;
         }
         
         .keyboard .key:hover {
             border: 5px solid rgba(65, 105, 225, 1);
         }
         
-        .keyboard .key.active {
+        .keyboard .key .active {
             background-color: rgba(65, 105, 225, 1);
             border-radius: 60px;
-            animation-name: press-button;
-            animation-duration: 0.3s;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
+            transform: translate(0, 7px);
+            box-shadow: -4px 4px 5px grey;
             border: 5px solid rgba(65, 105, 225, 1);
-        }
-        
-        .keyboard .key:active {
-            background-color: rgba(65, 105, 225, 1);
-            border-radius: 60px;
-            animation-name: press-button;
-            animation-duration: 0.3s;
-            animation-timing-function: linear;
-            animation-iteration-count: 1;
-            border: 5px solid rgba(65, 105, 225, 1);
-        }
-        
-        @keyframes press-button {
-            0% {
-                box-shadow: -8px 7px 5px grey;
-            }
-            50% {
-                transform: translate(0, 7px);
-                box-shadow: -4px 4px 5px grey;
-            }
-            100% {
-                box-shadow: -8px 7px 5px grey;
-            }
         }
         
         .keyboard .AltLeft,
@@ -178,46 +154,46 @@
         
         .keyboard .Tab,
         .keyboard .ControlLeft {
-            width: 75px
+            max-width: 75px
         }
         
         .keyboard .CapsLock {
-            width: 100px;
+            max-width: 100px;
         }
         
         .keyboard .Backspace {
-            width: 140px;
+            max-width: 140px;
         }
         
         .keyboard .ShiftRight,
         .keyboard .ShiftLeft {
-            width: 130px
+            max-width: 130px
         }
         
         .keyboard .Delete {
-            width: 45px
+            max-width: 45px
         }
         
         .keyboard .Enter {
-            width: 160px;
+            max-width: 160px;
         }
         
         .keyboard .MetaLeft,
         .keyboard .AltLeft,
         .keyboard .AltRight {
-            width: 60px;
+            max-width: 60px;
         }
         
         .keyboard .Space {
-            width: 425px
+            max-width: 425px
         }
         
         .keyboard .ControlRight {
-            width: 60px;
+            max-width: 60px;
         }
         
          ::-webkit-scrollbar {
-            width: 10px;
+            max-width: 10px;
             cursor: pointer;
         }
         
@@ -234,11 +210,21 @@
         }
         
         @media (max-width: 1130px) {
+            .wrapper {
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                position: relative;
+                height: 100%;
+            }
+            .title,
             .keyboard,
             .textarea,
             .description,
             .language {
-                position: relative;
+                position: static;
                 left: 0;
                 top: 0;
                 transform: unset;
@@ -252,11 +238,8 @@
                 transform-origin: unset;
                 box-shadow: unset;
                 text-shadow: -1px 1px 4px darkgrey;
-                transform: translate(-50%);
-                left: calc(50% - 10px);
-                top: -8px;
-                max-width: 719px;
-                width: 100%;
+                left: 50%;
+                transform: translate(-50%, 13px);
                 background: linear-gradient(180deg, rgba(48, 62, 104, 1) 80%, rgba(48, 62, 104, 0) 100%);
             }
             .textarea {
@@ -264,5 +247,26 @@
                 overflow-y: scroll;
                 overflow-x: hidden;
                 font-size: 20px;
+                width: 100%;
+            }
+            .keyboard {
+                max-width: 100%;
+                width: 100%;
+            }
+            .language,
+            .description {
+                text-align: center;
+                text-shadow: unset;
+                font-size: 24px;
+                color: white;
+                max-width: 80%;
+            }
+            .keyboard .row {
+                width: fit-content;
+            }
+            .keyboard .key {
+                box-shadow: unset;
+                max-width: fit-content;
+                padding: 0 2px;
             }
         }
