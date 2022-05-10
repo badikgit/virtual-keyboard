@@ -2,12 +2,13 @@ import KEYS from './keys.js';
 
 class Keyboard {
     constructor() {
+        this.keyCodes = [];
         this.element = null,
             this.textarea = null,
             this.state = {
                 isShiftLeftPressed: !1,
                 isShiftRightPressed: !1,
-                isCapsLockPressed: !1,
+                isCapsLockNotPressed: 0,
                 case: 'notShift',
                 lang: 'eng',
             },
@@ -61,15 +62,16 @@ class Keyboard {
             const row = document.createElement('div');
             row.classList.add('row');
             for (let currentKey = 0; currentKey < elements[currentRow].length; currentKey++) {
+                this.keyCodes.push(elements[currentRow][currentKey].code);
                 const key = document.createElement('div');
                 key.classList.add('key', elements[currentRow][currentKey].code);
-                let value = (!this.state.isCapsLockPressed && !this.state.isShiftLeftPressed && !this.state.isShiftRightPressed) ?
+                let value = (!this.state.isCapsLockNotPressed && !this.state.isShiftLeftPressed && !this.state.isShiftRightPressed) ?
                     ('notShift') :
-                    (!this.state.isCapsLockPressed && (this.state.isShiftLeftPressed || this.state.isShiftRightPressed)) ?
+                    (!this.state.isCapsLockNotPressed && (this.state.isShiftLeftPressed || this.state.isShiftRightPressed)) ?
                     ('shift') :
-                    (this.state.isCapsLockPressed && (!this.state.isShiftLeftPressed && !this.state.isShiftRightPressed)) ?
+                    (this.state.isCapsLockNotPressed && (!this.state.isShiftLeftPressed && !this.state.isShiftRightPressed)) ?
                     (elements[currentRow][currentKey][this.state.lang]['caps'] ? ('caps') : 'shift') :
-                    (this.state.isCapsLockPressed && (this.state.isShiftLeftPressed || this.state.isShiftRightPressed)) ?
+                    (this.state.isCapsLockNotPressed && (this.state.isShiftLeftPressed || this.state.isShiftRightPressed)) ?
                     (elements[currentRow][currentKey][this.state.lang]['shiftAndCaps'] ? ('shiftAndCaps') : 'notShift') : '';
                 key.innerHTML = elements[currentRow][currentKey][this.state.lang][value];
                 row.appendChild(key);
@@ -89,16 +91,44 @@ class Keyboard {
         document.body.appendChild(wrapper);
     }
     keyUp(element) {
-        console.log(element.code);
+        if (this.keyCodes.includes(element.code)) {
+            const key = document.querySelector('.' + element.code);
+            if (element.code !== 'CapsLock') key.classList.remove('active');
+            else {
+                this.state.isCapsLockNotPressed = !this.state.isCapsLockNotPressed;
+                this.state.isCapsLockNotPressed ? key.classList.toggle('active') : null;
+
+            }
+        }
     }
     keyDown(element) {
-        console.log(element.code);
+        if (this.keyCodes.includes(element.code)) {
+            const key = document.querySelector('.' + element.code);
+            if (element.code == 'CapsLock')
+                (!key.classList.contains('active') && this.state.isCapsLockNotPressed == 0) ? this.state.isCapsLockNotPressed = 1 : null;
+            key.classList.add('active');
+        }
     }
     mouseUp(element) {
-        console.log((!element.target.classList) ? '' : element.target.classList.value.includes('key') ? element.target.classList[1] : '');
+        if (element.composedPath()[0].classList[0] === 'key') {
+            const key = element.composedPath()[0];
+            if (key.classList[0] === 'key')
+                if (!key.classList.contains('CapsLock')) key.classList.remove('active');
+                else {
+                    this.state.isCapsLockNotPressed = !this.state.isCapsLockNotPressed;
+                    key.classList.toggle('active');
+
+                }
+        }
     }
     mouseDown(element) {
-        console.log((!element.target.classList) ? '' : element.target.classList.value.includes('key') ? element.target.classList[1] : '');
+        if (element.composedPath()[0].classList[0] === 'key') {
+            const key = element.composedPath()[0];
+            if (key.classList.contains('CapsLock'))
+                (!key.classList.contains('active') && this.state.isCapsLockNotPressed == 0) ? this.state.isCapsLockNotPressed = 1 : null;
+            else
+                key.classList.add('active');
+        }
     }
 
     initializationLanguage() {

@@ -125,7 +125,15 @@
             border: 5px solid rgba(65, 105, 225, 1);
         }
         
-        .keyboard .key .active {
+        .keyboard .active {
+            background-color: rgba(65, 105, 225, 1);
+            border-radius: 60px;
+            transform: translate(0, 7px);
+            box-shadow: -4px 4px 5px grey;
+            border: 5px solid rgba(65, 105, 225, 1);
+        }
+        
+        .keyboard .key:active {
             background-color: rgba(65, 105, 225, 1);
             border-radius: 60px;
             transform: translate(0, 7px);
