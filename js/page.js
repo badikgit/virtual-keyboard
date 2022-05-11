@@ -187,6 +187,26 @@ class Keyboard {
           printChar();
           break;
         }
+        case 'ArrowLeft': {
+          if (selectionStart > 0 && selectionStart <= value.length) {
+            this.textarea.selectionStart = selectionStart - 1;
+            this.textarea.selectionEnd = selectionStart - 1;
+          }
+          break;
+        }
+        case 'ArrowRight': {
+          this.textarea.selectionStart = selectionStart + 1;
+          this.textarea.selectionEnd = selectionStart + 1;
+          break;
+        }
+        case 'ArrowUp': {
+          /* НАПИСАТЬ! */
+          break;
+        }
+        case 'ArrowDown': {
+          /* НАПИСАТЬ! */
+          break;
+        }
         case 'CapsLock': {
           if (this.state.isCapsLockPressed && !this.current.event.repeat) {
             this.removeKeyActiveState();
@@ -217,9 +237,7 @@ class Keyboard {
         default:
       }
     } else if (this.current.code !== 'ArrowUp'
-    && this.current.code !== 'ArrowDown'
-    && this.current.code !== 'ArrowLeft'
-    && this.current.code !== 'ArrowRight') {
+    && this.current.code !== 'ArrowDown') {
       printChar();
     }
     if (this.current.event.ctrlKey && this.current.event.altKey) {
@@ -227,29 +245,41 @@ class Keyboard {
     }
   }
 
-  mouseUp(element) {
-    if (element.composedPath()[0].classList[0] === 'key') {
-      const key = element.composedPath()[0];
-      if (key.classList[0] === 'key') {
-        if (!key.classList.contains('CapsLock')) key.classList.remove('active');
-        else {
-          this.state.isCapsLockNotPressed = !this.state.isCapsLockNotPressed;
-          key.classList.toggle('active');
+  mouseUp(event) {
+    this.current.event = event;
+    this.current.element = event.target;
+    if (this.current.element) {
+      if (this.current.element.classList.contains('key')) {
+        [, this.current.code] = this.current.element.classList;
+      } else {
+        this.current = { ...this.previous };
+      }
+      if (this.current.code !== 'CapsLock') {
+        this.removeKeyActiveState();
+        if (this.state.isShiftLeftPressed && this.current.code === 'ShiftLeft') {
+          this.state.isShiftLeftPressed = !1;
+        } else if (this.state.isShiftRightPressed && this.current.code === 'ShiftRight') {
+          this.state.isShiftRightPressed = !1;
+          this.removeKeyActiveState();
         }
+        this.updateKeys();
       }
     }
   }
 
-  mouseDown(element) {
-    if (element.composedPath()[0].classList[0] === 'key') {
-      const key = element.composedPath()[0];
-      if (key.classList.contains('CapsLock')) {
-        if (!key.classList.contains('active') && this.state.isCapsLockNotPressed === 0) {
-          this.state.isCapsLockNotPressed = 1;
-        }
-      } else {
-        key.classList.add('active');
+  mouseDown(event) {
+    if (event.target.classList.contains('key')) {
+      this.current.event = event;
+      this.current.element = event.target;
+      [, this.current.code] = this.current.element.classList;
+      this.current.char = event.target.textContent;
+
+      this.currentKeyAction();
+      if (this.current.code !== 'CapsLock') {
+        this.addKeyActiveState();
       }
+      this.previous = { ...this.current };
+      event.preventDefault();
     }
   }
 
