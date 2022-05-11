@@ -45,17 +45,17 @@ class Keyboard {
     wrapper.appendChild(title);
     const textarea = document.createElement('textarea');
     textarea.classList.add('textarea');
-    textarea.setAttribute('id', 'textarea');
-    textarea.setAttribute('rows', '5');
-    textarea.setAttribute('cols', '50');
-    textarea.setAttribute('spellcheck', 'false');
+    textarea.id = 'textarea';
+    textarea.rows = 5;
+    textarea.cols = 50;
+    textarea.spellcheck = false;
     textarea.setAttribute('autofocus', '');
     textarea.addEventListener('blur', textarea.focus);
     this.textarea = textarea;
     wrapper.appendChild(this.textarea);
     this.element = document.createElement('div');
     this.element.classList.add('keyboard');
-    this.element.setAttribute('id', 'keyboard');
+    this.element.id = 'keyboard';
     const rows = document.createDocumentFragment();
 
     for (let currentRow = 0; currentRow < elements.length; currentRow += 1) {
@@ -65,22 +65,8 @@ class Keyboard {
         this.keyCodes.push(elements[currentRow][currentKey].code);
         const key = document.createElement('div');
         key.classList.add('key', elements[currentRow][currentKey].code);
-        let value = '';
-        if (!this.state.isCapsLockNotPressed
-          && !this.state.isShiftLeftPressed && !this.state.isShiftRightPressed) {
-          value = ('notShift');
-        } else if (!this.state.isCapsLockNotPressed
-          && (this.state.isShiftLeftPressed || this.state.isShiftRightPressed)) {
-          value = ('shift');
-        } else if (this.state.isCapsLockNotPressed
-          && (!this.state.isShiftLeftPressed && !this.state.isShiftRightPressed)) {
-          if (elements[currentRow][currentKey][this.state.lang].caps) { value = ('caps'); } else value = ('shift');
-        } else if (this.state.isCapsLockNotPressed
-          && (this.state.isShiftLeftPressed || this.state.isShiftRightPressed)) {
-          if (elements[currentRow][currentKey][this.state.lang].shiftAndCaps) value = ('shiftAndCaps');
-          else value = ('notShift');
-        }
-        key.innerHTML = elements[currentRow][currentKey][this.state.lang][value];
+        this.updateStateCase();
+        key.innerHTML = elements[currentRow][currentKey][this.state.lang][this.state.case];
         row.appendChild(key);
       }
       rows.appendChild(row);
@@ -129,7 +115,7 @@ class Keyboard {
             this.state.isShiftRightPressed = !1;
             this.removeKeyActiveState();
           }
-          this.toggleCase();
+          this.updateKeys();
         }
       }
     }
@@ -209,13 +195,14 @@ class Keyboard {
             this.addKeyActiveState();
             this.state.isCapsLockPressed = !0;
           }
-          this.toggleCase();
+          this.updateKeys();
           break;
         }
         case 'ShiftLeft': {
           if (!this.state.isShiftLeftPressed || !this.state.isShiftRightPressed) {
             this.addKeyActiveState();
-            this.state.isShiftLeftPressed = !0; this.toggleCase();
+            this.state.isShiftLeftPressed = !0;
+            this.updateKeys();
           }
           break;
         }
@@ -223,7 +210,7 @@ class Keyboard {
           if (!this.state.isShiftRightPressed || this.state.isShiftLeftPressed) {
             this.addKeyActiveState();
             this.state.isShiftRightPressed = !0;
-            this.toggleCase();
+            this.updateKeys();
           }
           break;
         }
@@ -266,22 +253,22 @@ class Keyboard {
     }
   }
 
-  toggleCase() {
-    const elements = document.querySelectorAll('.key');
+  updateKeys() {
+    const keys = this.element.querySelectorAll('.key');
     const values = {};
     [...Keys.rows].forEach((row) => row.forEach((key) => {
       values[key.code] = { eng: key.eng, rus: key.rus };
       return key;
     }));
 
-    for (let i = 0; i < elements.length; i += 1) {
-      const [, code] = elements[i].classList;
+    for (let i = 0; i < keys.length; i += 1) {
+      const [, code] = keys[i].classList;
       this.updateStateCase();
       if (!values[code][this.state.lang][this.state.case] && this.state.case === 'caps') {
         this.state.case = 'shift';
       } else if (!values[code][this.state.lang][this.state.case]) this.state.case = 'notShift';
 
-      elements[i].textContent = (values[code][this.state.lang][this.state.case]);
+      keys[i].textContent = (values[code][this.state.lang][this.state.case]);
     }
   }
 
@@ -300,7 +287,7 @@ class Keyboard {
     if (this.state.lang === 'eng') this.state.lang = 'rus';
     else this.state.lang = 'eng';
     localStorage.setItem('lang', this.state.lang);
-    this.toggleCase();
+    this.updateKeys();
   }
 
   initializationLanguage() {
