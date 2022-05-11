@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-default */
+// eslint-disable-next-line import/extensions
 import { default as Keys } from './keys.js';
 
 class Keyboard {
