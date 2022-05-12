@@ -124,10 +124,7 @@ class Keyboard {
   }
 
   keyDown(event) {
-    if (event.code !== 'ArrowUp'
-        && event.code !== 'ArrowDown'
-        && event.code !== 'ArrowLeft'
-        && event.code !== 'ArrowRight') { event.preventDefault(); }
+    event.preventDefault();
     this.current.event = event;
     this.current.code = event.code;
     [this.current.element] = this.element.getElementsByClassName(event.code);
@@ -190,23 +187,23 @@ class Keyboard {
           break;
         }
         case 'ArrowLeft': {
-          if (selectionStart > 0 && selectionStart <= value.length) {
-            this.textarea.selectionStart = selectionStart - 1;
-            this.textarea.selectionEnd = selectionStart - 1;
-          }
+          this.current.char = '◄';
+          printChar();
           break;
         }
         case 'ArrowRight': {
-          this.textarea.selectionStart = selectionStart + 1;
-          this.textarea.selectionEnd = selectionStart + 1;
+          this.current.char = '►';
+          printChar();
           break;
         }
         case 'ArrowUp': {
-          /* НАПИСАТЬ! */
+          this.current.char = '▲';
+          printChar();
           break;
         }
         case 'ArrowDown': {
-          /* НАПИСАТЬ! */
+          this.current.char = '▼';
+          printChar();
           break;
         }
         case 'CapsLock': {
@@ -238,10 +235,8 @@ class Keyboard {
         }
         default:
       }
-    } else if (this.current.code !== 'ArrowUp'
-    && this.current.code !== 'ArrowDown') {
-      printChar();
-    }
+    } else printChar();
+
     if (this.current.event.ctrlKey && this.current.event.altKey) {
       this.toggleLang();
     }
