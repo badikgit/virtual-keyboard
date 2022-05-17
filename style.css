@@ -1,280 +1,389 @@
-        body {
-            background-color: rgba(0, 0, 0, 0.85);
-        }
-        
-        .wrapper {
-            margin: 0 auto;
-            font-family: 'Press Start 2P', cursive;
-            transform-style: preserve-3d;
-        }
-        
-        .hidden {
-            display: none
-        }
-        
-        .description,
-        .language,
-        .title {
-            margin: 10px auto;
-            text-align: center;
-        }
-        
-        .title,
-        .keyboard,
-        .textarea,
-        .description,
-        .language {
-            position: absolute;
-            transform: rotateX(-306deg) rotateY(5deg) rotateZ(315deg);
-            transform-origin: 20% 45% 270px;
-        }
-        
-        .title {
-            top: 23px;
-            left: 18px;
-            padding-top: 20px;
-            margin-bottom: 0px;
-            font-size: 30px;
-            color: mediumturquoise;
-            background: rgb(48, 62, 104);
-            background: linear-gradient(180deg, rgba(48, 62, 104, 1) 80%, rgba(48, 62, 104, 0) 100%);
-            width: 718px;
-            height: 55px;
-            border-radius: 15px;
-            -webkit-text-fill-color: mediumturquoise;
-            text-shadow: -3px 3px 6px darkgrey;
-        }
-        
-        .textarea {
-            display: block;
-            z-index: 10;
-            max-width: 700px;
-            height: 200px;
-            margin: 10px auto 10px;
-            padding: 20px;
-            padding-top: 70px;
-            border-radius: 15px;
-            box-shadow: -5px 4px 25px royalblue;
-            resize: none;
-            background-color: rgba(65, 105, 225, 0.35);
-            color: mediumturquoise;
-            top: -30px;
-            left: 80px;
-            border: 2px solid lightskyblue;
-            text-shadow: -3px 2px 6px darkgrey;
-            font-size: 26px;
-        }
-        
-        .keyboard {
-            left: 190px;
-            top: 190px;
-            width: 1070px;
-            margin: 0 auto;
-            padding: 5px 0 0 5px;
-            font-family: sans-serif;
-            font-weight: 800;
-            transform: rotateX(-306deg) rotateY(5deg) rotateZ(315deg);
-            transform-origin: 20% 45% 270px;
-        }
-        
-        .description {
-            font-size: 20px;
-            left: 400px;
-            top: 435px;
-            font-weight: 800;
-            text-shadow: -8px 7px 5px grey;
-            color: white;
-        }
-        
-        .language {
-            color: black;
-            font-size: 40px;
-            left: 470px;
-            top: 440px;
-            font-weight: 800;
-            -webkit-text-stroke: rgb(255 255 255 / 53%) 0.01px;
-            text-shadow: -8px 7px 5px grey;
-        }
-        
-        .keyboard .row {
-            clear: both;
-            width: 100%;
-            height: 60px;
-        }
-        
-        .keyboard .key {
-            float: left;
-            width: 100%;
-            max-width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            margin: 5px;
-            line-height: 50px;
-            font-weight: 800;
-            text-align: center;
-            color: white;
-            background-color: black;
-            cursor: pointer;
-            user-select: none;
-            transition: border-radius 0.15s, background-color 0.3s, border-color 0.3s;
-            border: 5px solid black;
-            box-shadow: -8px 7px 5px grey;
-        }
-        
-        .keyboard .key:hover {
-            border: 5px solid rgba(65, 105, 225, 1);
-        }
-        
-        .keyboard .active {
-            background-color: rgba(65, 105, 225, 1);
-            border-radius: 60px;
-            transform: translate(0, 7px);
-            box-shadow: -4px 4px 5px grey;
-            border: 5px solid rgba(65, 105, 225, 1);
-        }
-        
-        .keyboard .key:active {
-            background-color: rgba(65, 105, 225, 1);
-            border-radius: 60px;
-            transform: translate(0, 7px);
-            box-shadow: -4px 4px 5px grey;
-            border: 5px solid rgba(65, 105, 225, 1);
-        }
-        
-        .keyboard .AltLeft,
-        .keyboard .AltRight,
-        .keyboard .ArrowUp,
-        .keyboard .ArrowLeft,
-        .keyboard .ArrowDown,
-        .keyboard .ArrowRight,
-        .keyboard .Backspace,
-        .keyboard .CapsLock,
-        .keyboard .ControlLeft,
-        .keyboard .ControlRight,
-        .keyboard .Delete,
-        .keyboard .Enter,
-        .keyboard .ShiftLeft,
-        .keyboard .ShiftRight,
-        .keyboard .Tab,
-        .keyboard .MetaLeft {
-            font-weight: 600;
-        }
-        
-        .keyboard .Tab,
-        .keyboard .ControlLeft {
-            max-width: 75px
-        }
-        
-        .keyboard .CapsLock {
-            max-width: 100px;
-        }
-        
-        .keyboard .Backspace {
-            max-width: 140px;
-        }
-        
-        .keyboard .ShiftRight,
-        .keyboard .ShiftLeft {
-            max-width: 130px
-        }
-        
-        .keyboard .Delete {
-            max-width: 45px
-        }
-        
-        .keyboard .Enter {
-            max-width: 160px;
-        }
-        
-        .keyboard .MetaLeft,
-        .keyboard .AltLeft,
-        .keyboard .AltRight {
-            max-width: 60px;
-        }
-        
-        .keyboard .Space {
-            max-width: 425px
-        }
-        
-        .keyboard .ControlRight {
-            max-width: 60px;
-        }
-        
-         ::-webkit-scrollbar {
-            max-width: 10px;
-            cursor: pointer;
-        }
-        
-         ::-webkit-scrollbar-track {
-            border-radius: 100px;
-            cursor: pointer;
-        }
-        
-         ::-webkit-scrollbar-thumb {
-            background-color: aquamarine;
-            border-radius: 50px;
-            padding-right: 5px;
-            cursor: pointer;
-        }
-        
-        @media (max-width: 1130px) {
-            .wrapper {
-                padding: 10px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-between;
-                position: relative;
-                height: 100%;
-            }
-            .title,
-            .keyboard,
-            .textarea,
-            .description,
-            .language {
-                position: static;
-                left: 0;
-                top: 0;
-                transform: unset;
-                transform-origin: unset;
-                box-shadow: unset;
-            }
-            .title {
-                position: absolute;
-                z-index: 15;
-                transform: unset;
-                transform-origin: unset;
-                box-shadow: unset;
-                text-shadow: -1px 1px 4px darkgrey;
-                left: 50%;
-                transform: translate(-50%, 13px);
-                background: linear-gradient(180deg, rgba(48, 62, 104, 1) 80%, rgba(48, 62, 104, 0) 100%);
-            }
-            .textarea {
-                text-shadow: -1px 1px 4px darkgrey;
-                overflow-y: scroll;
-                overflow-x: hidden;
-                font-size: 20px;
-                width: 100%;
-            }
-            .keyboard {
-                max-width: 100%;
-                width: 100%;
-            }
-            .language,
-            .description {
-                text-align: center;
-                text-shadow: unset;
-                font-size: 24px;
-                color: white;
-                max-width: 80%;
-            }
-            .keyboard .row {
-                width: fit-content;
-            }
-            .keyboard .key {
-                box-shadow: unset;
-                max-width: fit-content;
-                padding: 0 2px;
-            }
-        }
+body {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.wrapper {
+  margin: 0 auto;
+  font-family: 'Press Start 2P', cursive;
+  transform-style: preserve-3d;
+}
+
+.hidden {
+  display: none
+}
+
+.description,
+.language,
+.title {
+  margin: 10px auto;
+  text-align: center;
+}
+
+.title,
+.keyboard,
+.textarea,
+.description,
+.language {
+  position: absolute;
+  transform: rotateX(-306deg) rotateY(5deg) rotateZ(315deg);
+  transform-origin: 20% 45% 270px;
+}
+
+.title {
+  top: 23px;
+  left: 18px;
+  padding-top: 20px;
+  margin-bottom: 0px;
+  font-size: 30px;
+  color: mediumturquoise;
+  background: rgb(48, 62, 104);
+  background: linear-gradient(180deg, rgba(48, 62, 104, 1) 80%, rgba(48, 62, 104, 0) 100%);
+  width: 718px;
+  height: 55px;
+  border-radius: 15px;
+  -webkit-text-fill-color: mediumturquoise;
+  text-shadow: -3px 3px 6px darkgrey;
+}
+
+.textarea {
+  display: block;
+  z-index: 10;
+  max-width: 700px;
+  height: 200px;
+  margin: 10px auto 10px;
+  padding: 20px;
+  padding-top: 70px;
+  border-radius: 15px;
+  box-shadow: -5px 4px 25px royalblue;
+  resize: none;
+  background-color: rgba(65, 105, 225, 0.35);
+  color: mediumturquoise;
+  top: -30px;
+  left: 80px;
+  border: 2px solid lightskyblue;
+  text-shadow: -3px 2px 6px darkgrey;
+  font-size: 26px;
+}
+
+.keyboard {
+  left: 190px;
+  top: 190px;
+  width: 1070px;
+  margin: 0 auto;
+  padding: 5px 0 0 5px;
+  font-family: sans-serif;
+  font-weight: 800;
+  transform: rotateX(-306deg) rotateY(5deg) rotateZ(315deg);
+  transform-origin: 20% 45% 270px;
+}
+
+.description {
+  font-size: 20px;
+  left: 400px;
+  top: 435px;
+  font-weight: 800;
+  text-shadow: -8px 7px 5px grey;
+  color: white;
+}
+
+.language {
+  text-align: right;
+  color: wheat;
+  font-size: 30px;
+  left: 470px;
+  top: 440px;
+  font-weight: 800;
+  -webkit-text-stroke: rgb(255 255 255 / 53%) 0.01px;
+  text-shadow: -8px 7px 5px grey;
+}
+
+.keyboard .row {
+  clear: both;
+  width: 100%;
+  height: 60px;
+}
+
+.keyboard .key {
+  float: left;
+  width: 100%;
+  max-width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  margin: 5px;
+  line-height: 50px;
+  font-weight: 800;
+  text-align: center;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+  user-select: none;
+  transition: border-radius 0.15s, background-color 0.3s, border-color 0.3s;
+  border: 5px solid black;
+  box-shadow: -8px 7px 5px grey;
+}
+
+.keyboard .key:hover {
+  border: 5px solid rgba(65, 105, 225, 1);
+}
+
+.keyboard .active {
+  background-color: rgba(65, 105, 225, 1);
+  border-radius: 60px;
+  transform: translate(0, 7px);
+  box-shadow: -4px 4px 5px grey;
+  border: 5px solid rgba(65, 105, 225, 1);
+}
+
+.keyboard .key:active {
+  background-color: rgba(65, 105, 225, 1);
+  border-radius: 60px;
+  transform: translate(0, 7px);
+  box-shadow: -4px 4px 5px grey;
+  border: 5px solid rgba(65, 105, 225, 1);
+}
+
+.keyboard .AltLeft,
+.keyboard .AltRight,
+.keyboard .ArrowUp,
+.keyboard .ArrowLeft,
+.keyboard .ArrowDown,
+.keyboard .ArrowRight,
+.keyboard .Backspace,
+.keyboard .CapsLock,
+.keyboard .ControlLeft,
+.keyboard .ControlRight,
+.keyboard .Delete,
+.keyboard .Enter,
+.keyboard .ShiftLeft,
+.keyboard .ShiftRight,
+.keyboard .Tab,
+.keyboard .MetaLeft {
+  font-weight: 600;
+}
+
+.keyboard .Tab,
+.keyboard .ControlLeft {
+  max-width: 75px
+}
+
+.keyboard .CapsLock {
+  max-width: 100px;
+}
+
+.keyboard .Backspace {
+  max-width: 140px;
+}
+
+.keyboard .ShiftRight,
+.keyboard .ShiftLeft {
+  max-width: 130px
+}
+
+.keyboard .Delete {
+  max-width: 45px
+}
+
+.keyboard .Enter {
+  max-width: 160px;
+  font-size: xx-large;
+}
+
+.keyboard .Tab {
+  font-size: 28px;
+}
+
+.keyboard .Backspace {
+  font-size: 32px;
+}
+
+.keyboard .MetaLeft,
+.keyboard .AltLeft,
+.keyboard .AltRight {
+  max-width: 60px;
+}
+
+.keyboard .Space {
+  max-width: 425px
+}
+
+.keyboard .ControlRight {
+  max-width: 60px;
+}
+
+.textarea::-webkit-scrollbar {
+  max-width: 10px;
+  cursor: pointer;
+}
+
+.textarea::-webkit-scrollbar-track {
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.textarea::-webkit-scrollbar-thumb {
+  background-color: aquamarine;
+  border-radius: 50px;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 1130px) {
+  .wrapper {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 100%;
+  }
+
+  .title,
+  .keyboard,
+  .textarea,
+  .description,
+  .language {
+    position: static;
+    left: 0;
+    top: 0;
+    transform: unset;
+    transform-origin: unset;
+    box-shadow: unset;
+  }
+
+  .title {
+    position: static;
+    z-index: 15;
+    transform: unset;
+    transform-origin: unset;
+    box-shadow: unset;
+    text-shadow: -1px 1px 4px darkgrey;
+    left: 50%;
+    background: unset;
+    width: 100%;
+    max-width: 1000px;
+    box-sizing: border-box;
+    padding: 0;
+    font-size: 20px;
+  }
+
+  .textarea {
+    text-shadow: -1px 1px 4px darkgrey;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-size: 20px;
+    width: 100%;
+
+    box-sizing: border-box;
+    height: 33vh;
+    padding-top: 15px;
+  }
+
+  .keyboard,
+  .keyboard .row,
+  .keyboard .key {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    line-height: 2.1;
+    z-index: 10;
+  }
+
+  .keyboard {
+    max-width: 555px;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .language,
+  .description {
+    text-align: left;
+    text-shadow: unset;
+    font-size: 16px;
+    color: white;
+    max-width: 80%;
+  }
+
+  .keyboard .row {
+    width: fit-content;
+    max-width: 535px;
+  }
+
+  .keyboard .key {
+    width: 30px;
+    box-shadow: unset;
+    border: 3px solid black;
+    margin: 0 5px 5px 0;
+  }
+
+
+  .keyboard .key.Delete,
+  .keyboard .key.Enter,
+  .keyboard .key.ShiftRight,
+  .keyboard .key.ControlRight {
+    margin: 0 5px 0 0;
+  }
+
+
+  .keyboard .Backspace,
+  .keyboard .CapsLock,
+  .keyboard .ShiftLeft {
+    width: 65px;
+  }
+
+  .keyboard .key.Backspace,
+  .keyboard .ShiftRight,
+  .keyboard .Enter {
+    width: 75px;
+  }
+
+  .keyboard .Tab {
+    font-size: 16px;
+  }
+
+  .keyboard .Backspace {
+    font-size: 24px;
+    line-height: 1.5;
+  }
+
+  .keyboard .Enter {
+    font-size: 24px;
+    line-height: 1.7;
+  }
+
+  .keyboard .CapsLock {
+    padding-top: 2px;
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  .keyboard .Delete,
+  .keyboard .ControlLeft,
+  .keyboard .ControlRight,
+  .keyboard .MetaLeft,
+  .keyboard .AltLeft,
+  .keyboard .AltRight {
+    width: 40px;
+  }
+
+  .keyboard .Space {
+    width: 200px;
+  }
+
+  .keyboard .key:active,
+  .keyboard .key.active {
+    border-radius: 30px;
+    transform: unset;
+    box-shadow: unset;
+    border: 3px solid rgba(65, 105, 225, 1);
+  }
+
+  .keyboard .key:hover {
+    border: 3px solid rgba(65, 105, 225, 1);
+  }
+
+  .keyboard .row,
+  .keyboard .key {
+    height: 40px;
+  }
+}

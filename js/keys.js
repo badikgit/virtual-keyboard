@@ -200,14 +200,14 @@ class Keys {
     },
     {
       code: 'Backspace',
-      eng: { notShift: 'Backspace', shift: 'Backspace' },
-      rus: { notShift: 'Backspace', shift: 'Backspace' },
+      eng: { notShift: '⇤', shift: '⇤' },
+      rus: { notShift: '⇤', shift: '⇤' },
     },
     ],
     [{
       code: 'Tab',
-      eng: { notShift: 'Tab', shift: 'Tab' },
-      rus: { notShift: 'Tab', shift: 'Tab' },
+      eng: { notShift: '↹', shift: '↹' },
+      rus: { notShift: '↹', shift: '↹' },
     },
     {
       code: 'KeyQ',
@@ -312,8 +312,8 @@ class Keys {
     ],
     [{
       code: 'CapsLock',
-      eng: { notShift: 'CapsLock', shift: 'CapsLock' },
-      rus: { notShift: 'CapsLock', shift: 'CapsLock' },
+      eng: { notShift: 'Caps Lock', shift: 'Caps Lock' },
+      rus: { notShift: 'Caps Lock', shift: 'Caps Lock' },
     },
     {
       code: 'KeyA',
@@ -392,8 +392,8 @@ class Keys {
     },
     {
       code: 'Enter',
-      eng: { notShift: 'Enter', shift: 'Enter' },
-      rus: { notShift: 'Enter', shift: 'Enter' },
+      eng: { notShift: '↵', shift: '↵' },
+      rus: { notShift: '↵', shift: '↵' },
     },
     ],
     [{
@@ -499,8 +499,8 @@ class Keys {
     },
     {
       code: 'MetaLeft',
-      eng: { notShift: 'Win', shift: 'Win' },
-      rus: { notShift: 'Win', shift: 'Win' },
+      eng: { notShift: 'RU', shift: 'RU' },
+      rus: { notShift: 'EN', shift: 'EN' },
     },
     {
       code: 'AltLeft',
