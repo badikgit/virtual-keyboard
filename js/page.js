@@ -80,7 +80,7 @@ class Keyboard {
     description.classList.add('description');
     wrapper.appendChild(description);
     const language = document.createElement('p');
-    language.innerText = 'Для переключения языка комбинация: ctrl + alt';
+    language.innerText = 'Для переключения языка:\n1) комбинация Left Ctrl + Left Alt\n2) левая кнопка Win на физической клавиатуре\n3) кнопка EN (RU) на виртуальной клавиатуре';
     language.classList.add('language');
     wrapper.appendChild(language);
     document.body.appendChild(wrapper);
@@ -124,18 +124,20 @@ class Keyboard {
   }
 
   keyDown(event) {
-    event.preventDefault();
-    this.current.event = event;
-    this.current.code = event.code;
-    [this.current.element] = this.element.getElementsByClassName(event.code);
-    if (this.current.element) {
-      this.current.char = this.current.element.textContent;
-      this.currentKeyAction();
-      if (this.current.code === 'MetaLeft') {
-        this.addKeyActiveState();
-        setTimeout(this.removeKeyActiveState.bind(this), 300);
-      } else if (!['CapsLock', 'ShiftLeft', 'ShiftRight'].includes(this.current.code)) {
-        this.addKeyActiveState();
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.code)) {
+      event.preventDefault();
+      this.current.event = event;
+      this.current.code = event.code;
+      [this.current.element] = this.element.getElementsByClassName(event.code);
+      if (this.current.element) {
+        this.current.char = this.current.element.textContent;
+        this.currentKeyAction();
+        if (this.current.code === 'MetaLeft') {
+          this.addKeyActiveState();
+          setTimeout(this.removeKeyActiveState.bind(this), 300);
+        } else if (!['CapsLock', 'ShiftLeft', 'ShiftRight'].includes(this.current.code)) {
+          this.addKeyActiveState();
+        }
       }
     }
   }
@@ -147,8 +149,8 @@ class Keyboard {
     const printChar = () => {
       if (selectionStart >= 0 && selectionStart <= value.length) {
         this.textarea.value = value.slice(0, selectionStart)
-                            + this.current.char
-                            + value.slice(selectionStart, value.length);
+          + this.current.char
+          + value.slice(selectionStart, value.length);
         this.textarea.selectionStart = selectionStart + this.current.char.length;
         this.textarea.selectionEnd = selectionStart + this.current.char.length;
       } else {
@@ -187,23 +189,39 @@ class Keyboard {
           break;
         }
         case 'ArrowLeft': {
-          this.current.char = '◄';
-          printChar();
+          if (window.getSelection().focusOffset) {
+            window.getSelection().modify('move', 'backward', 'character');
+          } else if (this.textarea.selectionStart) {
+            this.textarea.selectionStart = selectionStart - 1;
+            this.textarea.selectionEnd = selectionStart - 1;
+          }
           break;
         }
         case 'ArrowRight': {
-          this.current.char = '►';
-          printChar();
+          if (window.getSelection().focusOffset) {
+            window.getSelection().modify('move', 'forward', 'character');
+          } else {
+            this.textarea.selectionStart = selectionStart + 1;
+            this.textarea.selectionEnd = selectionStart + 1;
+          }
           break;
         }
         case 'ArrowUp': {
-          this.current.char = '▲';
-          printChar();
+          if (window.getSelection().focusOffset) {
+            window.getSelection().modify('move', 'backward', 'line');
+          } else {
+            this.current.char = '▲';
+            printChar();
+          }
           break;
         }
         case 'ArrowDown': {
-          this.current.char = '▼';
-          printChar();
+          if (window.getSelection().focusOffset) {
+            window.getSelection().modify('move', 'forward', 'line');
+          } else {
+            this.current.char = '▼';
+            printChar();
+          }
           break;
         }
         case 'CapsLock': {
@@ -237,7 +255,9 @@ class Keyboard {
       }
     } else printChar();
 
-    if (this.current.event.ctrlKey && this.current.event.altKey) {
+    if ((this.current.event.ctrlKey && this.current.code === 'AltLeft')
+      || (this.current.code === 'ControlLeft' && this.current.event.altKey)
+      || (this.current.code === 'MetaLeft')) {
       this.toggleLang();
     }
   }
@@ -285,9 +305,7 @@ class Keyboard {
     const values = {};
     [...Keys.rows].forEach((row) => row.forEach((key) => {
       values[key.code] = { eng: key.eng, rus: key.rus };
-      return key;
     }));
-
     for (let i = 0; i < keys.length; i += 1) {
       const [, code] = keys[i].classList;
       this.updateStateCase();
